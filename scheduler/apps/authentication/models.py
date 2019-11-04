@@ -56,7 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """
 
     email = models.EmailField(unique=True, db_index=True, null=False)
-    username = models.CharField(max_length=30, blank=True, null=False)
+    username = models.CharField(max_length=30, blank=True, null=False, unique=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
