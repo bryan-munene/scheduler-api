@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'scheduler.apps.authentication',
+    'scheduler.apps.projects',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,8 +57,8 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'scheduler.apps.authentication.backends.JWTAuthentication',
     ),
 }
 
