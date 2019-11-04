@@ -1,6 +1,4 @@
-import os
 from django.db import models
-from django.utils.text import slugify
 from scheduler.apps.authentication.models import User
 
 class Project(models.Model):
@@ -9,7 +7,7 @@ class Project(models.Model):
     description = models.TextField(blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, default=0, on_delete=models.SET_DEFAULT)
     
     def __str__(self):
         return self.title
