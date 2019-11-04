@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Task
+from scheduler.apps.authentication.models import User
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -18,6 +19,17 @@ class TaskSerializer(serializers.ModelSerializer):
             'required': 'the description cannot be empty'
         }
     )
+
+    def validate(self, data):
+        username = data.get('assigned_to')
+        if username:
+            user = User.objects.filter(username=username).first()
+            
+            if not user:
+                raise serializers.ValidationError(
+                    'A user with this username does not exist.'
+                )
+        return data
 
     class Meta:
         model = Task
